@@ -1,40 +1,51 @@
 import React from 'react';
 import { motion, useScroll, useTransform, useMotionTemplate, useMotionValue } from 'framer-motion';
 import type { Variants } from 'framer-motion';
-import { Github, Linkedin, Mail, ExternalLink, Palette, BarChart3, Briefcase, Code2, Sparkles, Sprout, KeyRound, User, Lock, Gamepad2 } from 'lucide-react';
+import { Github, Linkedin, Mail, ExternalLink, Palette, BarChart3, Briefcase, Code2, Sparkles, Sprout, KeyRound, User, Lock, Gamepad2, Cpu, GraduationCap, School } from 'lucide-react';
+
 // --- DATA ---
 const projects = [
   {
     id: 1,
     title: "Habit Garden",
-    subtitle: "Thesis Project: Gamification Research",
-    // Upravený text: více akademický a profesionální
-    description: "Turning daily routines into a virtual garden. This thesis project investigates the impact of gamification on user retention, contrasting 'juicy' game design mechanics with minimalist functionalism.",
+    subtitle: "Gamification Thesis Project",
+    description: "Turning daily routines into a virtual garden. This project investigates how 'juicy' game design mechanics impact user retention compared to minimalist functionalism. Users grow digital plants by completing real-world habits.",
     hasCredentials: true,
     credentials: {
       email: "testgamified@user.app",
       pass: "SecretPassword1"
     },
-    tags: ["React", "TypeScript", "Node.js", "Express", "MongoDB"],
+    tags: ["React", "TypeScript", "Node.js", "MongoDB"],
     link: "https://habitgarden.app",
-    isFeatured: true,
     color: "from-green-500/20 to-emerald-500/5 border-green-500/30 text-green-300", 
-    cta: "Join the Experiment"
+    cta: "Join the Experiment",
+    icon: <Sprout size={64} className="text-emerald-100" />
   },
   {
     id: 2,
-    title: "Public Space Management",
-    subtitle: "Enterprise App for TSK Praha",
-    // Upravený text: důraz na dopad a složitost
-    description: "Digitizing Prague's infrastructure management. A complex React frontend for TSK Praha that transforms technical municipal data into an intuitive workflow for city planners and engineers.",
-    // Přidána sekce "Impact" pro vyvážení výšky karty s prvním projektem
+    title: "Infrastructure Manager",
+    subtitle: "Internal App for TSK Praha",
+    description: "A complex internal tool for managing municipal infrastructure. I developed responsive interfaces that handle large datasets and complex forms, bridging the gap between technical data constraints and user-friendly design for city engineers.",
     hasImpact: true,
-    impact: "Designed complex forms handling 50+ data points and bridged the gap between technical constraints and user needs.",
+    impact: "Designed intuitive workflows for processing 50+ data points, significantly improving the efficiency of the city planning department.",
     tags: ["React", "Enterprise UX", "REST API", "Complex Forms"],
     link: "#",
-    isFeatured: false,
     color: "from-blue-500/20 to-indigo-500/5 border-blue-500/30 text-blue-300",
-    cta: "View Details"
+    cta: "View Details",
+    icon: <Briefcase size={64} className="text-blue-100" />
+  },
+  {
+    id: 3,
+    title: "Pills4U",
+    subtitle: "IoT Smart Dispenser",
+    description: "A smart medication management system designed to help seniors. We built a physical dispenser powered by ESP32 that syncs with a React web dashboard, allowing caregivers to monitor dosage schedules remotely.",
+    hasImpact: true,
+    impact: "Led the student team to build a functional prototype addressing real-world healthcare challenges for the elderly.",
+    tags: ["IoT", "React", "ESP32", "Team Leadership"],
+    link: "#", 
+    color: "from-pink-500/20 to-rose-500/5 border-pink-500/30 text-pink-300",
+    cta: "View Project",
+    icon: <Cpu size={64} className="text-pink-100" />
   }
 ];
 
@@ -42,6 +53,21 @@ const skills = [
   { category: "Frontend", icon: <Code2 size={20} />, items: ["React", "TypeScript", "Tailwind", "Framer Motion"] },
   { category: "Backend", icon: <Briefcase size={20} />, items: ["Node.js", "Express", "REST API", "MongoDB"] },
   { category: "Design", icon: <Palette size={20} />, items: ["Figma", "UI/UX Principles", "ProCreate", "Interactive Design"] }
+];
+
+const education = [
+  {
+    school: "Unicorn University",
+    degree: "Software Development (Bc.)",
+    year: "Expected early 2026",
+    icon: <GraduationCap size={20} />
+  },
+  {
+    school: "Secondary School of Art",
+    degree: "Painting & New Technologies",
+    year: "Graduated 2017",
+    icon: <School size={20} />
+  }
 ];
 
 // --- ANIMATION VARIANTS ---
@@ -108,28 +134,38 @@ function App() {
       </div>
 
       {/* --- HERO SECTION --- */}
-      <header className="min-h-[85vh] flex flex-col justify-center items-center text-center px-6 relative overflow-hidden z-10 w-full">
+      <header className="min-h-[90vh] flex flex-col justify-center items-center text-center px-6 relative overflow-hidden z-10 w-full">
         
-        {/* Animated Blobs - Added breathing animation */}
+        {/* Animated Blobs - Upraveno pro větší pohyb */}
         <motion.div 
           animate={{ 
-            scale: [1, 1.1, 1], 
-            opacity: [0.3, 0.4, 0.3],
-            rotate: [0, 10, 0]
+            scale: [1, 1.2, 1], 
+            opacity: [0.3, 0.5, 0.3],
+            x: [0, 50, 0],
+            y: [0, -30, 0]
           }}
-          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
           style={{ y: y1, x: -100 }} 
-          className="absolute top-1/4 left-1/4 w-64 h-64 bg-purple-600/20 rounded-full blur-[100px]" 
+          className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-600/20 rounded-full blur-[120px] mix-blend-screen" 
         />
         <motion.div 
           animate={{ 
-             scale: [1, 1.2, 1], 
-             opacity: [0.2, 0.3, 0.2],
-             rotate: [0, -15, 0]
+             scale: [1, 1.3, 1], 
+             opacity: [0.2, 0.4, 0.2],
+             x: [0, -50, 0],
+             y: [0, 40, 0]
           }}
-          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+          transition={{ duration: 15, repeat: Infinity, ease: "easeInOut", delay: 1 }}
           style={{ y: y2, x: 100 }} 
-          className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-indigo-600/10 rounded-full blur-[100px]" 
+          className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-indigo-600/10 rounded-full blur-[120px] mix-blend-screen" 
+        />
+         <motion.div 
+          animate={{ 
+             scale: [1, 1.1, 1], 
+             opacity: [0.1, 0.3, 0.1],
+          }}
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-teal-500/10 rounded-full blur-[130px] mix-blend-screen" 
         />
 
         <motion.div 
@@ -138,8 +174,7 @@ function App() {
           animate="visible"
           className="relative z-10 max-w-3xl px-4 flex flex-col items-center"
         >
-          {/* Oprava useknutého háčku: přidáno py-4 a leading-normal */}
-          <motion.h1 variants={itemVariants} className="text-4xl md:text-7xl font-bold tracking-tight mb-2 py-4 bg-gradient-to-r from-indigo-200 via-purple-100 to-pink-200 text-transparent bg-clip-text leading-normal">
+          <motion.h1 variants={itemVariants} className="text-4xl md:text-7xl font-bold tracking-tight mb-2 py-4 bg-gradient-to-r from-indigo-200 via-purple-100 to-pink-200 text-transparent bg-clip-text leading-tight">
             Barbora Šimordová
           </motion.h1>
 
@@ -172,20 +207,22 @@ function App() {
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
           variants={containerVariants}
-          className="space-y-12"
+          className="space-y-16"
         >
-          <div className="text-center max-w-2xl mx-auto space-y-4">
+          <div className="text-center max-w-2xl mx-auto space-y-6">
             <motion.h3 variants={itemVariants} className="text-2xl font-bold text-slate-100 inline-flex items-center gap-3">
               <span className="w-8 h-1 bg-indigo-500 rounded-full"></span>
-              The "Why"
+              Philosophy & Background
             </motion.h3>
+            {/* Přepsaný text - méně AI, více human */}
             <motion.p variants={itemVariants} className="text-base text-slate-400 leading-relaxed">
-              I started my journey at the <strong>Secondary School of Art</strong>, learning that detail is everything. 
-              At <strong>Unicorn University</strong>, I discovered code as the ultimate medium for interactivity.
-              My goal is to build interfaces that don't just function, but feel alive.
+              My journey began in the world of fine arts, where I learned that <strong>detail is everything</strong>. 
+              Transitioning to software development allowed me to apply that creative mindset to logic and structure. 
+              I don't just write code; I build accessible, interactive interfaces that solve real problems while feeling great to use.
             </motion.p>
           </div>
           
+          {/* Skills Grid */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 w-full">
             {skills.map((s) => (
               <motion.div 
@@ -208,6 +245,27 @@ function App() {
               </motion.div>
             ))}
           </div>
+
+          {/* Education Section (Newly Added) */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto">
+             {education.map((edu, index) => (
+               <motion.div 
+                key={index}
+                variants={itemVariants}
+                className="flex items-center gap-4 p-4 rounded-lg bg-slate-900/20 border border-slate-800/50"
+               >
+                 <div className="p-3 bg-slate-800 rounded-full text-indigo-400">
+                    {edu.icon}
+                 </div>
+                 <div>
+                    <h4 className="text-slate-200 font-bold">{edu.school}</h4>
+                    <p className="text-sm text-slate-400">{edu.degree}</p>
+                    <p className="text-xs text-indigo-400/80 font-mono mt-1">{edu.year}</p>
+                 </div>
+               </motion.div>
+             ))}
+          </div>
+
         </motion.div>
       </Section>
 
@@ -230,92 +288,92 @@ function App() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.1 }}
-            className="space-y-12"
+            className="space-y-16" // Větší mezera mezi projekty
           >
             {projects.map((project) => (
               <motion.div 
                 key={project.id}
                 variants={itemVariants}
                 whileHover={{ y: -5, transition: { duration: 0.3 } }}
-                // h-full a flex-col pro rovnoměrné roztažení
-                className={`group relative grid md:grid-cols-2 gap-6 p-2 rounded-3xl transition-all duration-500 bg-slate-900/60 hover:bg-slate-800/80 border border-slate-800 hover:border-indigo-500/30 shadow-xl hover:shadow-2xl hover:shadow-indigo-900/10 items-stretch`}
+                className={`group relative grid md:grid-cols-2 gap-0 md:gap-8 overflow-hidden rounded-3xl transition-all duration-500 bg-slate-900/60 hover:bg-slate-800/80 border border-slate-800 hover:border-indigo-500/30 shadow-xl hover:shadow-2xl hover:shadow-indigo-900/10 items-stretch`}
               >
-                {/* Visual Side */}
-                <div className={`relative h-full min-h-[240px] rounded-2xl overflow-hidden bg-gradient-to-br ${project.color} flex flex-col items-center justify-centerQl border border-white/5`}>
+                {/* Visual Side - Fixed Centering */}
+                <div className={`relative min-h-[240px] md:h-full bg-gradient-to-br ${project.color} flex flex-col items-center justify-center border-b md:border-b-0 md:border-r border-white/5 p-8`}>
                    <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay" />
                    
                    <motion.div 
                      whileHover={{ scale: 1.1, rotate: 5 }}
                      transition={{ type: "spring", stiffness: 300 }}
-                     className="relative z-10 drop-shadow-xl"
+                     className="relative z-10 drop-shadow-2xl"
                    >
-                     {project.id === 1 ? <Sprout size={64} className="text-emerald-100" /> : <Briefcase size={64} className="text-blue-100" />}
+                     {project.icon}
                    </motion.div>
                 </div>
 
                 {/* Content Side */}
-                <div className="flex flex-col justify-center p-5 h-full">
-                  <div className="flex justify-between items-start mb-3">
+                <div className="flex flex-col justify-center p-6 md:p-8 h-full">
+                  <div className="flex justify-between items-start mb-4">
                     <div>
                       <h4 className="text-2xl font-bold text-slate-100 mb-1 group-hover:text-indigo-300 transition-colors">
                         {project.title}
                       </h4>
-                      <p className="text-indigo-400 font-bold text-sm tracking-wide">{project.subtitle}</p>
+                      <p className="text-indigo-400 font-bold text-sm tracking-wide uppercase opacity-80">{project.subtitle}</p>
                     </div>
                     {project.link !== "#" && (
-                      <a href={project.link} target="_blank" rel="noopener noreferrer" className="p-2 bg-slate-800 rounded-full hover:bg-indigo-600 transition-all hover:scale-110 hover:shadow-lg">
+                      <a href={project.link} target="_blank" rel="noopener noreferrer" className="p-2 bg-slate-800 rounded-full hover:bg-indigo-600 transition-all hover:scale-110 hover:shadow-lg text-slate-300 hover:text-white">
                         <ExternalLink size={18} />
                       </a>
                     )}
                   </div>
                   
-                  <p className="text-slate-300 leading-relaxed mb-6 text-sm">
+                  <p className="text-slate-300 leading-relaxed mb-6 text-sm md:text-base">
                     {project.description}
                   </p>
 
-                  {/* Credentials / Impact Block - Helps balance height */}
-                  <div className="mb-6">
+                  {/* Impact / Credentials Block */}
+                  <div className="mb-6 space-y-3">
                     {project.hasCredentials && project.credentials && (
                       <div className="bg-slate-950/40 p-3 rounded-lg border border-emerald-900/30 hover:border-emerald-500/30 transition-colors">
                         <div className="flex items-center gap-2 text-xs font-bold text-emerald-500 uppercase tracking-wider mb-2">
-                          <KeyRound size={12} /> Test Account
+                          <KeyRound size={12} /> Demo Access
                         </div>
-                        <div className="flex flex-col sm:flex-row gap-2 text-xs font-mono text-slate-300">
-                          <div className="flex items-center gap-2 bg-slate-900 px-2 py-1 rounded">
+                        <div className="flex flex-col sm:flex-row gap-3 text-xs font-mono text-slate-300">
+                          <div className="flex items-center gap-2 bg-slate-900 px-2 py-1.5 rounded border border-slate-800">
                               <User size={12} className="text-slate-500"/> 
-                              <span className="select-all cursor-text">{project.credentials.email}</span>
+                              <span className="select-all cursor-text hover:text-white transition-colors">{project.credentials.email}</span>
                           </div>
-                          <div className="flex items-center gap-2 bg-slate-900 px-2 py-1 rounded">
+                          <div className="flex items-center gap-2 bg-slate-900 px-2 py-1.5 rounded border border-slate-800">
                               <Lock size={12} className="text-slate-500"/> 
-                              <span className="select-all cursor-text">{project.credentials.pass}</span>
+                              <span className="select-all cursor-text hover:text-white transition-colors">{project.credentials.pass}</span>
                           </div>
                         </div>
                       </div>
                     )}
 
-                    {/* Placeholder for visual balance if impact is present */}
                     {project.hasImpact && project.impact && (
-                      <div className="bg-slate-950/40 p-3 rounded-lg border border-indigo-900/30 hover:border-indigo-500/30 transition-colors">
+                      <div className="bg-slate-950/40 p-4 rounded-lg border border-indigo-900/30 hover:border-indigo-500/30 transition-colors">
                          <div className="flex items-center gap-2 text-xs font-bold text-indigo-400 uppercase tracking-wider mb-2">
                             <BarChart3 size={12} /> Key Impact
                           </div>
-                          <p className="text-xs text-slate-400 leading-relaxed">{project.impact}</p>
+                          <p className="text-xs md:text-sm text-slate-400 leading-relaxed italic">"{project.impact}"</p>
                       </div>
                     )}
                   </div>
 
-                  <div className="mt-auto">
+                  <div className="mt-auto pt-4 border-t border-slate-800/50">
                     <div className="flex flex-wrap gap-2 mb-4">
                       {project.tags.map(tag => (
-                        <span key={tag} className="px-2.5 py-1 text-xs font-medium rounded-full bg-slate-800 text-slate-400 border border-slate-700/50">
+                        <span key={tag} className="px-2.5 py-1 text-xs font-medium rounded-full bg-slate-800 text-slate-400 border border-slate-700/50 hover:border-indigo-500/30 transition-colors">
                           {tag}
                         </span>
                       ))}
                     </div>
 
-                    {project.id === 1 && (
-                       <a href={project.link} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-sm font-bold text-emerald-400 hover:text-emerald-300 transition-all hover:gap-3">
-                          <Gamepad2 size={16} /> {project.cta} <span>→</span>
+                    {project.link !== "#" && (
+                       <a href={project.link} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-sm font-bold text-indigo-400 hover:text-indigo-300 transition-all hover:gap-3 group/link">
+                          {project.id === 1 ? <Gamepad2 size={16} /> : <ExternalLink size={16} />} 
+                          {project.cta} 
+                          <span className="group-hover/link:translate-x-1 transition-transform">→</span>
                        </a>
                     )}
                   </div>
@@ -327,13 +385,13 @@ function App() {
       </div>
 
       {/* --- FOOTER --- */}
-      <footer className="py-12 border-t border-slate-800/50 text-center relative overflow-hidden w-full mt-auto">
+      <footer className="py-12 border-t border-slate-800/50 text-center relative overflow-hidden w-full mt-auto bg-slate-950">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[60%] h-[1px] bg-gradient-to-r from-transparent via-indigo-500/30 to-transparent" />
         
-        <div className="flex justify-center gap-8 mb-6">
+        <div className="flex justify-center gap-8 mb-6 relative z-10">
           {[
-            { icon: <Github size={20} />, href: "https://github.com/barborasim" },
-            { icon: <Linkedin size={20} />, href: "https://linkedin.com/in/barborasim" },
+            { icon: <Github size={20} />, href: "https://github.com/belialsabertoothed" },
+            { icon: <Linkedin size={20} />, href: "https://linkedin.com/in/barbora-simordova" },
             { icon: <Mail size={20} />, href: "mailto:b.simordova@gmail.com" }
           ].map((social, i) => (
             <motion.a 
@@ -348,7 +406,7 @@ function App() {
             </motion.a>
           ))}
         </div>
-        <p className="text-slate-600 text-xs">
+        <p className="text-slate-600 text-xs relative z-10">
           © {new Date().getFullYear()} Barbora Šimordová
         </p>
       </footer>
