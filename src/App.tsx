@@ -1,18 +1,19 @@
-import React, { useState, useEffect } from 'react';
-import { motion, useScroll, useTransform, useSpring, useMotionTemplate, useMotionValue } from 'framer-motion';
-import { Github, Linkedin, Mail, ExternalLink, Palette, Briefcase, Code2, Sparkles } from 'lucide-react';
+import React from 'react';
+import { motion, useScroll, useTransform, useMotionTemplate, useMotionValue } from 'framer-motion';
+import { Github, Linkedin, Mail, ExternalLink, Palette, Briefcase, Code2, Sparkles, Sprout, Gamepad2 } from 'lucide-react';
 
 // --- DATA ---
 const projects = [
   {
     id: 1,
     title: "Habit Garden",
-    subtitle: "Gamifying Productivity",
-    description: "A full-stack 'cognitive scaffold' for users with ADHD. Features a custom gamification engine, offline-first PWA capabilities, and secure JWT authentication. Built with the psychology of 'Juicy UI' in mind.",
-    tags: ["React", "TypeScript", "Node.js", "MongoDB", "PWA"],
+    subtitle: "Thesis Project: Gamification vs. Minimalism",
+    description: "Does gamification actually help us stick to our habits? I investigates this in my thesis project. A full-stack application where habits turn into virtual plants, helping users build consistency through care and growth. Currently seeking users for a comparative study.",
+    tags: ["React", "TypeScript", "Node.js", "Express", "MongoDB"],
     link: "https://habitgarden.app",
     isFeatured: true,
-    color: "from-emerald-500/20 to-teal-500/5 border-emerald-500/30 text-emerald-300"
+    color: "from-green-500/20 to-emerald-500/5 border-green-500/30 text-green-300", 
+    cta: "Join the Experiment"
   },
   {
     id: 2,
@@ -22,42 +23,26 @@ const projects = [
     tags: ["React", "Enterprise UX", "REST API", "Complex Forms"],
     link: "#",
     isFeatured: false,
-    color: "from-blue-500/20 to-indigo-500/5 border-blue-500/30 text-blue-300"
+    color: "from-blue-500/20 to-indigo-500/5 border-blue-500/30 text-blue-300",
+    cta: "View Details"
   }
 ];
 
 const skills = [
   { category: "Frontend", icon: <Code2 size={18} />, items: ["React", "TypeScript", "Tailwind", "Framer Motion"] },
   { category: "Backend", icon: <Briefcase size={18} />, items: ["Node.js", "Express", "REST API", "MongoDB"] },
-  { category: "Design", icon: <Palette size={18} />, items: ["Figma", "UI/UX Principles", "ProCreate", "Juicy UI"] }
+  // Odstraněno "Juicy UI", nahrazeno za Interactive Design
+  { category: "Design", icon: <Palette size={18} />, items: ["Figma", "UI/UX Principles", "ProCreate", "Interactive Design"] }
 ];
 
 // --- COMPONENTS ---
 
-// 1. Spotlight Effect Component
-function Spotlight({ mouseX, mouseY }: { mouseX: any, mouseY: any }) {
-  return (
-    <motion.div
-      className="pointer-events-none fixed -inset-px rounded-xl opacity-0 transition duration-300 group-hover:opacity-100 z-10"
-      style={{
-        background: useMotionTemplate`
-          radial-gradient(
-            650px circle at ${mouseX}px ${mouseY}px,
-            rgba(79, 70, 229, 0.10),
-            transparent 80%
-          )
-        `,
-      }}
-    />
-  );
-}
-
 const Section = ({ children, className = "" }: { children: React.ReactNode; className?: string }) => (
   <motion.div
-    initial={{ opacity: 0, y: 50 }}
+    initial={{ opacity: 0, y: 30 }}
     whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true, margin: "-100px" }}
-    transition={{ duration: 0.7, type: "spring", bounce: 0.3 }}
+    viewport={{ once: true, margin: "-50px" }}
+    transition={{ duration: 0.6, ease: "easeOut" }}
     className={`max-w-4xl mx-auto px-6 py-24 ${className}`}
   >
     {children}
@@ -67,11 +52,11 @@ const Section = ({ children, className = "" }: { children: React.ReactNode; clas
 // --- MAIN APP ---
 
 function App() {
-  let mouseX = useMotionValue(0);
-  let mouseY = useMotionValue(0);
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
 
   function handleMouseMove({ currentTarget, clientX, clientY }: React.MouseEvent) {
-    let { left, top } = currentTarget.getBoundingClientRect();
+    const { left, top } = currentTarget.getBoundingClientRect();
     mouseX.set(clientX - left);
     mouseY.set(clientY - top);
   }
@@ -84,7 +69,7 @@ function App() {
   return (
     <div 
       onMouseMove={handleMouseMove}
-      className="group relative min-h-screen bg-slate-950 text-slate-200 font-sans selection:bg-indigo-500/30 overflow-x-hidden"
+      className="group relative min-h-screen bg-slate-950 text-slate-200 font-sans selection:bg-indigo-500/30 overflow-x-hidden w-full"
     >
       {/* Global Spotlight (Background Glow following mouse) */}
       <div className="pointer-events-none fixed inset-0 z-0 transition duration-300 lg:absolute">
@@ -103,42 +88,28 @@ function App() {
       </div>
 
       {/* --- HERO SECTION --- */}
-      <header className="h-screen flex flex-col justify-center items-center text-center px-6 relative overflow-hidden z-10">
+      <header className="min-h-screen flex flex-col justify-center items-center text-center px-6 relative overflow-hidden z-10 w-full">
         
         {/* Animated Background Blobs */}
-        <motion.div style={{ y: y1, x: -100 }} className="absolute top-1/4 left-1/4 w-72 h-72 bg-purple-500/20 rounded-full blur-[100px]" />
-        <motion.div style={{ y: y2, x: 100 }} className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-indigo-500/10 rounded-full blur-[100px]" />
+        <motion.div style={{ y: y1, x: -100 }} className="absolute top-1/4 left-1/4 w-72 h-72 bg-purple-500/20 rounded-full blur-[100px] opacity-50" />
+        <motion.div style={{ y: y2, x: 100 }} className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-indigo-500/10 rounded-full blur-[100px] opacity-50" />
 
-        <div className="relative z-10">
+        <div className="relative z-10 max-w-3xl">
           <motion.div 
-            initial={{ opacity: 0, scale: 0.9 }}
+            initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1 }}
+            transition={{ duration: 0.8 }}
           >
-            {/* Staggered Text Reveal */}
-            <h1 className="text-5xl md:text-8xl font-bold tracking-tight mb-6 bg-gradient-to-r from-indigo-200 via-purple-200 to-pink-200 text-transparent bg-clip-text">
-              <motion.span 
-                initial={{ opacity: 0, y: 20 }} 
-                animate={{ opacity: 1, y: 0 }} 
-                transition={{ delay: 0.2 }}
-              >
-                Barbora
-              </motion.span>{" "}
-              <motion.span 
-                initial={{ opacity: 0, y: 20 }} 
-                animate={{ opacity: 1, y: 0 }} 
-                transition={{ delay: 0.4 }}
-              >
-                Šimordová
-              </motion.span>
+            <h1 className="text-5xl md:text-8xl font-bold tracking-tight mb-6 bg-gradient-to-r from-indigo-200 via-purple-200 to-pink-200 text-transparent bg-clip-text pb-2">
+              Barbora Šimordová
             </h1>
           </motion.div>
 
           <motion.p 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.8, duration: 1 }}
-            className="text-xl md:text-2xl text-slate-400 max-w-2xl mx-auto mb-10 font-light"
+            transition={{ delay: 0.4, duration: 0.8 }}
+            className="text-xl md:text-2xl text-slate-400 mb-10 font-light"
           >
             Frontend Developer & UI Designer <br/>
             <span className="text-indigo-400 font-medium">Bridging the gap between Code & Art.</span>
@@ -147,14 +118,13 @@ function App() {
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.2 }}
-            className="flex gap-4 justify-center"
+            transition={{ delay: 0.6 }}
+            className="flex flex-col sm:flex-row gap-4 justify-center items-center"
           >
-            <a href="#projects" className="group relative px-8 py-3 bg-indigo-600 rounded-full font-medium text-white overflow-hidden transition-all hover:scale-105 hover:shadow-[0_0_40px_-10px_rgba(79,70,229,0.5)]">
-              <span className="relative z-10 flex items-center gap-2">View Work <Sparkles size={16} /></span>
-              <div className="absolute inset-0 bg-gradient-to-r from-indigo-600 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity" />
+            <a href="#projects" className="w-full sm:w-auto px-8 py-3 bg-indigo-600 rounded-full font-medium text-white transition-all hover:bg-indigo-500 hover:shadow-[0_0_20px_rgba(79,70,229,0.4)] flex items-center justify-center gap-2">
+              View Work <Sparkles size={16} />
             </a>
-            <a href="mailto:b.simordova@gmail.com" className="px-8 py-3 border border-slate-700 hover:border-slate-500 hover:bg-slate-800/50 rounded-full font-medium transition-all text-slate-300">
+            <a href="mailto:b.simordova@gmail.com" className="w-full sm:w-auto px-8 py-3 border border-slate-700 hover:border-slate-500 hover:bg-slate-800/50 rounded-full font-medium transition-all text-slate-300">
               Contact Me
             </a>
           </motion.div>
@@ -174,7 +144,7 @@ function App() {
               Later, at <strong>Unicorn University</strong>, I discovered that code is the ultimate medium for interactivity.
             </p>
             <p className="text-lg text-slate-400 leading-relaxed">
-              My goal is to build applications that are not just "functional", but <strong>"juicy"</strong>—interfaces that feel alive and respond to the user, especially for accessibility-focused projects like Habit Garden.
+              My goal is to build applications that are responsive, accessible, and meaningful—interfaces that feel alive, especially for research-driven projects like Habit Garden.
             </p>
           </div>
           
@@ -184,7 +154,7 @@ function App() {
                 key={s.category}
                 initial={{ opacity: 0, x: 20 }}
                 whileInView={{ opacity: 1, x: 0 }}
-                transition={{ delay: i * 0.2 }}
+                transition={{ delay: i * 0.1 }}
                 whileHover={{ scale: 1.02 }}
                 className="bg-slate-900/40 p-6 rounded-2xl border border-slate-800 hover:border-indigo-500/30 transition-colors backdrop-blur-sm"
               >
@@ -206,7 +176,7 @@ function App() {
       </Section>
 
       {/* --- PROJECTS --- */}
-      <div id="projects" className="relative py-32">
+      <div id="projects" className="relative py-32 w-full">
         <div className="absolute inset-0 bg-slate-900/20 -skew-y-3 z-0 origin-top-left scale-110" />
         
         <Section className="relative z-10">
@@ -219,19 +189,25 @@ function App() {
                 key={project.id}
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.2 }}
+                transition={{ delay: index * 0.1 }}
                 className={`group relative grid md:grid-cols-2 gap-8 p-1 rounded-3xl transition-all duration-500 hover:bg-slate-800/30`}
               >
                 {/* Visual Side */}
                 <div className={`relative h-64 md:h-auto rounded-2xl overflow-hidden bg-gradient-to-br ${project.color} flex items-center justify-center border border-white/5`}>
                    <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20" />
-                   {/* Placeholder icon - Replace with IMG later */}
+                   
                    <motion.div 
                      whileHover={{ scale: 1.1, rotate: 5 }}
                      transition={{ type: "spring", stiffness: 300 }}
                    >
-                     {project.id === 1 ? <Palette size={64} className="text-emerald-200/50" /> : <Briefcase size={64} className="text-blue-200/50" />}
+                     {project.id === 1 ? <Sprout size={64} className="text-emerald-200/80" /> : <Briefcase size={64} className="text-blue-200/50" />}
                    </motion.div>
+
+                   {project.isFeatured && (
+                      <div className="absolute top-4 right-4 bg-emerald-500/20 text-emerald-300 text-xs font-bold px-3 py-1 rounded-full border border-emerald-500/30 backdrop-blur-md">
+                        THESIS PROJECT
+                      </div>
+                   )}
                 </div>
 
                 {/* Content Side */}
@@ -254,13 +230,21 @@ function App() {
                     {project.description}
                   </p>
 
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-2 mb-6">
                     {project.tags.map(tag => (
                       <span key={tag} className="px-3 py-1 text-xs rounded-full bg-slate-800 text-slate-300 border border-slate-700">
                         {tag}
                       </span>
                     ))}
                   </div>
+
+                  {project.id === 1 && (
+                     <div className="mt-auto">
+                        <a href={project.link} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-sm font-semibold text-emerald-400 hover:text-emerald-300 transition-colors">
+                           <Gamepad2 size={16} /> {project.cta} <span>→</span>
+                        </a>
+                     </div>
+                  )}
                 </div>
               </motion.div>
             ))}
@@ -269,7 +253,7 @@ function App() {
       </div>
 
       {/* --- FOOTER --- */}
-      <footer className="py-20 border-t border-slate-800/50 text-center relative overflow-hidden">
+      <footer className="py-20 border-t border-slate-800/50 text-center relative overflow-hidden w-full">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[500px] h-[1px] bg-gradient-to-r from-transparent via-indigo-500 to-transparent opacity-50" />
         
         <div className="flex justify-center gap-8 mb-8">
