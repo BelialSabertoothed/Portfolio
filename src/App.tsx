@@ -75,7 +75,7 @@ const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: { staggerChildren: 0.15, delayChildren: 0.2 }
+    transition: { staggerChildren: 0.1, delayChildren: 0.1 }
   }
 };
 
@@ -84,7 +84,7 @@ const itemVariants: Variants = {
   visible: {
     y: 0,
     opacity: 1,
-    transition: { type: "spring", stiffness: 120, damping: 20 }
+    transition: { type: "spring", stiffness: 100, damping: 20 }
   }
 };
 
@@ -136,13 +136,12 @@ function App() {
       {/* --- HERO SECTION --- */}
       <header className="min-h-[90vh] flex flex-col justify-center items-center text-center px-6 relative overflow-hidden z-10 w-full">
         
-        {/* Animated Blobs - Upraveno pro větší pohyb */}
+        {/* Animated Blobs */}
         <motion.div 
           animate={{ 
             scale: [1, 1.2, 1], 
             opacity: [0.3, 0.5, 0.3],
             x: [0, 50, 0],
-            y: [0, -30, 0]
           }}
           transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
           style={{ y: y1, x: -100 }} 
@@ -153,7 +152,6 @@ function App() {
              scale: [1, 1.3, 1], 
              opacity: [0.2, 0.4, 0.2],
              x: [0, -50, 0],
-             y: [0, 40, 0]
           }}
           transition={{ duration: 15, repeat: Infinity, ease: "easeInOut", delay: 1 }}
           style={{ y: y2, x: 100 }} 
@@ -174,7 +172,7 @@ function App() {
           animate="visible"
           className="relative z-10 max-w-3xl px-4 flex flex-col items-center"
         >
-          <motion.h1 variants={itemVariants} className="text-4xl md:text-7xl font-bold tracking-tight mb-2 py-4 bg-gradient-to-r from-indigo-200 via-purple-100 to-pink-200 text-transparent bg-clip-text leading-tight">
+          <motion.h1 variants={itemVariants} className="text-4xl md:text-7xl font-bold tracking-tight mb-4 py-2 bg-gradient-to-r from-indigo-200 via-purple-100 to-pink-200 text-transparent bg-clip-text leading-tight">
             Barbora Šimordová
           </motion.h1>
 
@@ -183,7 +181,7 @@ function App() {
             className="text-lg md:text-2xl text-slate-400 mb-8 font-light leading-relaxed max-w-xl"
           >
             Frontend Developer & UI Designer <br/>
-            <span className="text-indigo-400 font-medium text-base md:text-xl">Bridging the gap between Code & Art.</span>
+            <span className="text-indigo-400 font-medium text-base md:text-xl">Code. Design. Impact.</span>
           </motion.p>
 
           <motion.div 
@@ -205,20 +203,19 @@ function App() {
         <motion.div 
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
+          viewport={{ once: true, amount: 0.2 }}
           variants={containerVariants}
           className="space-y-16"
         >
           <div className="text-center max-w-2xl mx-auto space-y-6">
             <motion.h3 variants={itemVariants} className="text-2xl font-bold text-slate-100 inline-flex items-center gap-3">
               <span className="w-8 h-1 bg-indigo-500 rounded-full"></span>
-              Philosophy & Background
+              The "Why"
             </motion.h3>
-            {/* Přepsaný text - méně AI, více human */}
             <motion.p variants={itemVariants} className="text-base text-slate-400 leading-relaxed">
-              My journey began in the world of fine arts, where I learned that <strong>detail is everything</strong>. 
-              Transitioning to software development allowed me to apply that creative mindset to logic and structure. 
-              I don't just write code; I build accessible, interactive interfaces that solve real problems while feeling great to use.
+              I see code as a creative medium. Coming from an <strong>art background</strong>, I learned that detail is everything. 
+              Now, I apply that same precision to Frontend Development.
+              My goal? To build interfaces that don't just work, but feel <i>alive</i> and intuitive.
             </motion.p>
           </div>
           
@@ -246,13 +243,13 @@ function App() {
             ))}
           </div>
 
-          {/* Education Section (Newly Added) */}
+          {/* Education Section */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto">
              {education.map((edu, index) => (
                <motion.div 
                 key={index}
                 variants={itemVariants}
-                className="flex items-center gap-4 p-4 rounded-lg bg-slate-900/20 border border-slate-800/50"
+                className="flex items-center gap-4 p-4 rounded-lg bg-slate-900/20 border border-slate-800/50 hover:border-indigo-500/20 transition-colors"
                >
                  <div className="p-3 bg-slate-800 rounded-full text-indigo-400">
                     {edu.icon}
@@ -270,7 +267,9 @@ function App() {
       </Section>
 
       {/* --- PROJECTS --- */}
-      <div id="projects" className="relative py-16 w-full flex-1">
+      {/* ODSTRANĚNO overflow-hidden, aby se vykreslil obsah. */}
+      {/* ODSTRANĚNO flex-1, aby se výška přizpůsobila obsahu. */}
+      <div id="projects" className="relative py-16 w-full pb-32"> 
         <div className="absolute inset-0 bg-slate-900/30 -skew-y-2 z-0 origin-top-left scale-110" />
         
         <Section className="relative z-10">
@@ -288,7 +287,7 @@ function App() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.1 }}
-            className="space-y-16" // Větší mezera mezi projekty
+            className="space-y-16"
           >
             {projects.map((project) => (
               <motion.div 
@@ -297,7 +296,7 @@ function App() {
                 whileHover={{ y: -5, transition: { duration: 0.3 } }}
                 className={`group relative grid md:grid-cols-2 gap-0 md:gap-8 overflow-hidden rounded-3xl transition-all duration-500 bg-slate-900/60 hover:bg-slate-800/80 border border-slate-800 hover:border-indigo-500/30 shadow-xl hover:shadow-2xl hover:shadow-indigo-900/10 items-stretch`}
               >
-                {/* Visual Side - Fixed Centering */}
+                {/* Visual Side */}
                 <div className={`relative min-h-[240px] md:h-full bg-gradient-to-br ${project.color} flex flex-col items-center justify-center border-b md:border-b-0 md:border-r border-white/5 p-8`}>
                    <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay" />
                    
@@ -337,14 +336,15 @@ function App() {
                         <div className="flex items-center gap-2 text-xs font-bold text-emerald-500 uppercase tracking-wider mb-2">
                           <KeyRound size={12} /> Demo Access
                         </div>
-                        <div className="flex flex-col sm:flex-row gap-3 text-xs font-mono text-slate-300">
-                          <div className="flex items-center gap-2 bg-slate-900 px-2 py-1.5 rounded border border-slate-800">
-                              <User size={12} className="text-slate-500"/> 
-                              <span className="select-all cursor-text hover:text-white transition-colors">{project.credentials.email}</span>
+                        {/* Zde je flex-col pro správné zobrazení na malých displejích */}
+                        <div className="flex flex-col gap-2 text-xs font-mono text-slate-300">
+                          <div className="flex items-center gap-2 bg-slate-900 px-2 py-1.5 rounded border border-slate-800 overflow-hidden">
+                              <User size={12} className="text-slate-500 shrink-0"/> 
+                              <span className="select-all cursor-text hover:text-white transition-colors truncate">{project.credentials.email}</span>
                           </div>
-                          <div className="flex items-center gap-2 bg-slate-900 px-2 py-1.5 rounded border border-slate-800">
-                              <Lock size={12} className="text-slate-500"/> 
-                              <span className="select-all cursor-text hover:text-white transition-colors">{project.credentials.pass}</span>
+                          <div className="flex items-center gap-2 bg-slate-900 px-2 py-1.5 rounded border border-slate-800 overflow-hidden">
+                              <Lock size={12} className="text-slate-500 shrink-0"/> 
+                              <span className="select-all cursor-text hover:text-white transition-colors truncate">{project.credentials.pass}</span>
                           </div>
                         </div>
                       </div>
@@ -385,7 +385,8 @@ function App() {
       </div>
 
       {/* --- FOOTER --- */}
-      <footer className="py-12 border-t border-slate-800/50 text-center relative overflow-hidden w-full mt-auto bg-slate-950">
+      {/* Footer má nyní z-50 a pevné pozadí, aby překryl jakýkoliv přečuhující element z projektů */}
+      <footer className="relative z-50 bg-slate-950 py-12 border-t border-slate-800/50 text-center w-full mt-auto">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[60%] h-[1px] bg-gradient-to-r from-transparent via-indigo-500/30 to-transparent" />
         
         <div className="flex justify-center gap-8 mb-6 relative z-10">
