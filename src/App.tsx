@@ -319,7 +319,7 @@ function App() {
                       <p className="text-indigo-400 font-bold text-sm tracking-wide uppercase opacity-80">{project.subtitle}</p>
                     </div>
                     {project.link !== "#" && (
-                      <a href={project.link} target="_blank" rel="noopener noreferrer" className="p-2 bg-slate-800 rounded-full hover:bg-indigo-600 transition-all hover:scale-110 hover:shadow-lg text-slate-300 hover:text-white">
+                      <a href={project.link} target="https://habitgarden.app" rel="noopener noreferrer" className="p-2 bg-slate-800 rounded-full hover:bg-indigo-600 transition-all hover:scale-110 hover:shadow-lg text-slate-300 hover:text-white">
                         <ExternalLink size={18} />
                       </a>
                     )}
