@@ -56,10 +56,11 @@ const projects = [
     icon: <Sprout size={64} className="text-emerald-100" />,
     images: [
       "/projects/garden1.png",
-      "/projects/garden2.png",
-      "/projects/garden3.png",
-      "/projects/garden4.png",
       "/projects/garden5.png",
+      "/projects/garden4.png",
+
+      "/projects/garden3.png",
+      "/projects/garden2.png",
     ],
   },
   {
