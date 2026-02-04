@@ -77,7 +77,12 @@ const projects = [
     color: "from-blue-500/20 to-indigo-500/5 border-blue-500/30 text-blue-300",
     cta: "View Details",
     icon: <Briefcase size={64} className="text-blue-100" />,
-    // images: [] // Pokud doplníš obrázky, odkomentuj
+    images: [
+      "/projects/tsk1.png",
+      "/projects/tsk2.png",
+      "/projects/tsk3.png",
+      "/projects/tsk4.png",
+    ]
   },
   {
     id: 3,
@@ -124,7 +129,7 @@ const education = [
   {
     school: "Unicorn University",
     degree: "Software Development (Bc.)",
-    year: "Expected early 2026",
+    year: "Graduated January 2026",
     icon: <GraduationCap size={20} />,
   },
   {
@@ -273,9 +278,8 @@ function App() {
                 {activeGallery.images.map((_, i) => (
                   <div
                     key={i}
-                    className={`w-2 h-2 rounded-full transition-colors ${
-                      i === activeGallery.index ? "bg-white" : "bg-slate-600"
-                    }`}
+                    className={`w-2 h-2 rounded-full transition-colors ${i === activeGallery.index ? "bg-white" : "bg-slate-600"
+                      }`}
                   />
                 ))}
               </div>
@@ -502,11 +506,9 @@ function App() {
                 {/* Visual Side (Interactive Gallery Trigger) */}
                 <div
                   onClick={() => openGallery(project.images || [])}
-                  className={`relative min-h-[240px] md:h-full bg-gradient-to-br ${
-                    project.color
-                  } flex flex-col items-center justify-center border-b md:border-b-0 md:border-r border-white/5 overflow-hidden ${
-                    project.images ? "cursor-pointer" : ""
-                  }`}
+                  className={`relative min-h-[240px] md:h-full bg-gradient-to-br ${project.color
+                    } flex flex-col items-center justify-center border-b md:border-b-0 md:border-r border-white/5 overflow-hidden ${project.images ? "cursor-pointer" : ""
+                    }`}
                 >
                   <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay" />
 
@@ -655,7 +657,24 @@ function App() {
             ))}
           </motion.div>
         </Section>
+        
+          <motion.div
+            variants={itemVariants}
+            className="mt-12 p-6 rounded-2xl bg-indigo-500/5 border border-indigo-500/20 text-center"
+          >
+            <h4 className="text-indigo-300 font-bold mb-2 flex items-center justify-center gap-2">
+              <Sparkles size={18} /> Currently Working On
+            </h4>
+            <p className="text-slate-400 text-sm md:text-base">
+              I am currently expanding my technical horizon by diving into
+              <span className="text-slate-200 font-semibold"> C++ </span> and
+              <span className="text-slate-200 font-semibold"> Java </span>
+              to better understand low-level programming and enterprise backend structures.
+            </p>
+          </motion.div>
+
       </div>
+      
 
       {/* --- FOOTER --- */}
       <footer className="relative z-50 bg-slate-950 py-12 border-t border-slate-800/50 text-center w-full mt-auto">
